@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="register-form">
+    <view class="form-header">
+      <text class="form-title">注册</text>
+      <text class="form-subtitle">校园跑腿互助系统</text>
+    </view>
+    
+    <view class="form-body">
+      <!-- 头像设置 -->
+      <view class="form-item">
+        <view class="form-label">头像</view>
+        <view class="avatar-uploader" bindtap="chooseAvatar">
+          <image class="avatar-img" src="{{avatar || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}" mode="aspectFill"></image>
+        </view>
+      </view>
+      
+      <!-- 昵称设置 -->
+      <view class="form-item">
+        <view class="form-label">昵称</view>
+        <input class="form-input" placeholder="请输入昵称" bindinput="handleNickNameInput" value="{{nickname}}"/>
+      </view>
+      
+      <!-- 手机号 -->
+      <view class="form-item">
+        <view class="form-label">手机号</view>
+        <input class="form-input" placeholder="请输入手机号" bindinput="handlePhoneInput" value="{{phone}}"/>
+      </view>
+      
+      <!-- 密码 -->
+      <view class="form-item">
+        <view class="form-label">密码</view>
+        <input class="form-input" placeholder="请输入密码" password bindinput="handlePasswordInput" value="{{password}}"/>
+      </view>
+      
+      <!-- 确认密码 -->
+      <view class="form-item">
+        <view class="form-label">确认密码</view>
+        <input class="form-input" placeholder="请再次输入密码" password bindinput="handleConfirmPasswordInput" value="{{confirmPassword}}"/>
+      </view>
+      
+      <button class="register-btn" bindtap="handleRegister">注册</button>
+      
+      <view class="form-footer">
+        <text class="login-link" bindtap="navigateToLogin">已有账号？立即登录</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,65 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="back-btn" bindtap="navigateBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">{{chatUser}}</text>
+    <view class="header-right" bindtap="navigateToUserInfo">
+      <text class="info-icon">ℹ</text>
+    </view>
+  </view>
+  
+  <!-- 聊天消息列表 -->
+  <view class="chat-list" scroll-y="true">
+    <block wx:for="{{messages}}" wx:key="id">
+      <!-- 自己的消息 -->
+      <view wx:if="{{item.senderId === userId}}" class="message-item my-message">
+        <view class="message-avatar">
+          <image class="avatar-img" src="{{myAvatar}}" mode="aspectFill" binderror="handleAvatarError"></image>
+        </view>
+        <view class="message-content">
+          <view class="message-bubble">
+            <text wx:if="{{!item.type || item.type === 'text'}}" class="message-text">{{item.content}}</text>
+            <image wx:else class="message-image" src="{{item.content}}" mode="aspectFill"></image>
+          </view>
+          <text class="message-time">{{item.time}}</text>
+        </view>
+      </view>
+      
+      <!-- 对方消息 -->
+      <view wx:else class="message-item other-message">
+        <view class="message-avatar">
+          <image class="avatar-img" src="{{otherUserAvatar}}" mode="aspectFill" binderror="handleAvatarError"></image>
+        </view>
+        <view class="message-content">
+          <view class="message-bubble">
+            <text wx:if="{{!item.type || item.type === 'text'}}" class="message-text">{{item.content}}</text>
+            <image wx:else class="message-image" src="{{item.content}}" mode="aspectFill"></image>
+          </view>
+          <text class="message-time">{{item.time}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 消息输入区域 -->
+  <view class="input-section">
+    <!-- 图片预览区域 -->
+    <view wx:if="{{selectedImage}}" class="image-preview-container">
+      <image class="image-preview" src="{{selectedImage}}" mode="aspectFill"></image>
+      <button class="cancel-image-btn" bindtap="cancelImage">×</button>
+    </view>
+    
+    <view class="input-container">
+      <button class="image-btn" bindtap="chooseImage">📷</button>
+      <input 
+        class="message-input" 
+        placeholder="输入消息..." 
+        value="{{inputValue}}" 
+        bindinput="handleInput"
+      />
+    </view>
+    <button class="send-btn" bindtap="handleSend" disabled="{{!inputValue && !selectedImage}}">发送</button>
+  </view>
+</view>

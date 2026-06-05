@@ -1,0 +1,134 @@
+<!--index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list" bindrefresherpulling="onPullDownRefresh" bindrefresherrefresh="onPullDownRefresh" refresher-enabled="true" refresher-background="#f5f5f5" refresher-triggered="{{refresherTriggered}}">
+  <view class="container">
+    <!-- 排行榜区域 -->
+    <view class="ranking-section">
+      <view class="ranking-header">
+        <text class="ranking-title">排行榜</text>
+        <text class="ranking-more" bindtap="navigateToRanking">查看更多 →</text>
+      </view>
+      <view class="ranking-tabs">
+        <view class="ranking-tab {{activeRankingTab === 0 ? 'active' : ''}}" bindtap="switchRankingTab" data-index="0">
+          <text class="ranking-tab-text">任务完成榜</text>
+        </view>
+        <view class="ranking-tab {{activeRankingTab === 1 ? 'active' : ''}}" bindtap="switchRankingTab" data-index="1">
+          <text class="ranking-tab-text">获赞榜</text>
+        </view>
+      </view>
+      <view class="ranking-content">
+        <block wx:if="{{activeRankingTab === 0}}">
+          <view wx:for="{{taskCompletionRanking}}" wx:key="id" class="ranking-item">
+            <view class="ranking-number {{index < 3 ? 'top' : ''}}">{{index + 1}}</view>
+            <view class="ranking-user" bindtap="navigateToUserInfo" data-id="{{item.id}}" data-name="{{item.nickname}}">
+              <image class="ranking-avatar" src="{{item.avatar && item.avatar.startsWith('/api') ? 'http://localhost:8881' + item.avatar : (item.avatar && item.avatar.startsWith('/') ? 'http://localhost:8881/api' + item.avatar : (item.avatar || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'))}}"></image>
+              <text class="ranking-nickname">{{item.nickname}}</text>
+            </view>
+            <text class="ranking-value">{{item.taskCount}}单</text>
+          </view>
+          <view wx:if="{{taskCompletionRanking.length === 0}}" class="ranking-empty">
+            <text>暂无数据</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view wx:for="{{likesRanking}}" wx:key="id" class="ranking-item">
+            <view class="ranking-number {{index < 3 ? 'top' : ''}}">{{index + 1}}</view>
+            <view class="ranking-user" bindtap="navigateToUserInfo" data-id="{{item.id}}" data-name="{{item.nickname}}">
+              <image class="ranking-avatar" src="{{item.avatar && item.avatar.startsWith('/api') ? 'http://localhost:8881' + item.avatar : (item.avatar && item.avatar.startsWith('/') ? 'http://localhost:8881/api' + item.avatar : (item.avatar || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'))}}"></image>
+              <text class="ranking-nickname">{{item.nickname}}</text>
+            </view>
+            <text class="ranking-value">{{item.likesCount}}赞</text>
+          </view>
+          <view wx:if="{{likesRanking.length === 0}}" class="ranking-empty">
+            <text>暂无数据</text>
+          </view>
+        </block>
+      </view>
+    </view>
+    
+    <!-- 顶部搜索栏 -->
+    <view class="search-bar">
+      <view class="search-input">
+        <text class="search-icon">🔍</text>
+        <input placeholder="搜索任务标题、类型、地点" placeholder-class="search-placeholder" bindinput="handleSearch" />
+      </view>
+    </view>
+
+    <!-- 任务类型快捷选择 -->
+    <view class="task-type-tags">
+      <view wx:for="{{taskTypes}}" wx:key="index" class="task-type-tag {{selectedTaskType === item ? 'active' : ''}}" bindtap="selectTaskType" data-type="{{item}}">
+        <text class="tag-text">{{item}}</text>
+      </view>
+    </view>
+
+
+    
+    <!-- 发布任务按钮 (仅登录用户可见) -->
+    <view wx:if="{{isLoggedIn}}" class="publish-btn-container">
+      <button class="publish-btn" bindtap="navigateToPublish">+ 发布任务</button>
+    </view>
+    
+    <!-- 任务列表 (所有用户可见) -->
+    <view class="task-list">
+      <view class="list-header">
+        <text class="list-title">任务列表</text>
+        <text class="list-count">{{filteredTaskList.length}} 个任务</text>
+      </view>
+      
+      <view class="task-items">
+        <block wx:for="{{filteredTaskList}}" wx:key="id">
+          <view class="task-item fade-in-up">
+            <view bindtap="navigateToTaskDetail" data-id="{{item.id}}" class="task-content">
+              <view class="task-header">
+                <view class="task-title-container">
+                  <text class="task-title">{{item.title}}</text>
+                  <text class="task-reward">¥{{item.reward}}</text>
+                </view>
+                <text class="task-status" wx:class="task-status-{{item.status === '待接单' ? 'pending' : 'accepted'}}">{{item.status}}</text>
+              </view>
+              <view class="task-info">
+                <view class="info-item">
+                  <text class="info-label">类型：</text>
+                  <text class="info-value">{{item.type}}</text>
+                </view>
+                <view class="info-item">
+                  <text class="info-label">地点：</text>
+                  <text class="info-value">{{item.location}}</text>
+                </view>
+                <view class="info-item">
+                  <text class="info-label">时间：</text>
+                  <text class="info-value">{{item.time}}</text>
+                </view>
+              </view>
+              <view class="task-footer">
+                <view class="publisher-info">
+                  <image wx:if="{{item.publisherAvatar}}" class="publisher-avatar-img" src="{{item.publisherAvatar}}" mode="aspectFill"></image>
+                  <text wx:else class="publisher-avatar">👤</text>
+                  <text class="task-publisher">{{item.publisher}}</text>
+                </view>
+                <view class="task-meta">
+                  <text class="task-time-created">{{item.createdAt}}</text>
+                </view>
+              </view>
+            </view>
+            <view class="task-action" wx:if="{{item.status === '待接单' && isLoggedIn && item.publisherId !== userInfo.id && !(userInfo.phone === 'admin' && userInfo.role === 1)}}">
+              <button class="accept-btn" catchtap="handleAcceptTask" data-id="{{item.id}}">立即接单</button>
+            </view>
+          </view>
+        </block>
+        
+        <!-- 空状态 -->
+        <view wx:if="{{filteredTaskList.length === 0}}" class="empty-state">
+          <text class="empty-icon">📋</text>
+          <text class="empty-text">{{searchKeyword ? '没有找到相关任务' : '暂无任务'}}</text>
+          <text class="empty-subtext">{{searchKeyword ? '请尝试其他关键词' : '成为第一个发布任务的人吧'}}</text>
+        </view>
+        
+        <!-- 加载状态 -->
+        <view wx:if="{{loading}}" class="loading-state">
+          <view class="loading-spinner"></view>
+          <text class="loading-text">加载中...</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

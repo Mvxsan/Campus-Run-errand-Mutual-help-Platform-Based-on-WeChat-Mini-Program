@@ -1,0 +1,376 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 40rpx;
+}
+
+/* 用户信息区域 */
+.user-info-section {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  padding: 30rpx;
+  background-color: #ffffff;
+  margin: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.user-info-section:hover {
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.12);
+  transform: translateY(-2rpx);
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.user-info-section:hover .user-avatar {
+  transform: scale(1.05);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+}
+
+.user-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.user-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.user-phone {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.arrow-icon {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.arrow-text {
+  font-size: 28rpx;
+  color: #999999;
+  transition: all 0.3s ease;
+}
+
+.user-info-section:hover .arrow-text {
+  color: #1890ff;
+  transform: translateX(5rpx);
+}
+
+/* 任务统计区域 */
+.stats-section {
+  background-color: #ffffff;
+  padding: 24rpx;
+  margin: 0 20rpx 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  border-radius: 16rpx;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.stats-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1890ff;
+  margin-bottom: 8rpx;
+}
+
+.stats-label {
+  font-size: 22rpx;
+  color: #666666;
+}
+
+.stats-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background-color: #f0f0f0;
+}
+
+/* 资金信息区域 */
+.fund-section {
+  background-color: #ffffff;
+  padding: 24rpx;
+  margin: 0 20rpx 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  border-radius: 16rpx;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fund-section:active {
+  background-color: #f5f5f5;
+  transform: translateY(-2rpx);
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.12);
+}
+
+.fund-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fund-label {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.fund-value-container {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.fund-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+  transition: all 0.3s ease;
+}
+
+.fund-section:active .fund-value {
+  color: #ff7875;
+}
+
+.fund-arrow {
+  font-size: 28rpx;
+  color: #999999;
+  transition: all 0.3s ease;
+}
+
+.fund-section:active .fund-arrow {
+  color: #1890ff;
+  transform: translateX(5rpx);
+}
+
+/* 功能菜单区域 */
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  margin: 0 20rpx 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+/* 四宫格菜单 */
+.menu-grid {
+  display: flex;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.menu-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  padding: 10rpx;
+  border-radius: 12rpx;
+}
+
+.menu-item:hover {
+  background-color: #f0f8ff;
+  transform: translateY(-2rpx);
+}
+
+.menu-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10rpx;
+  transition: all 0.3s ease;
+}
+
+.menu-item:hover .menu-icon {
+  transform: scale(1.05);
+  background-color: #e6f7ff;
+}
+
+.menu-icon-text {
+  font-size: 40rpx;
+}
+
+.menu-text {
+  font-size: 22rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+/* 列表菜单 */
+.menu-list {
+  padding: 20rpx 0;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.list-item:hover {
+  background-color: #f9f9f9;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-icon {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  transition: all 0.3s ease;
+}
+
+.list-item:hover .list-icon {
+  transform: scale(1.05);
+  background-color: #e6f7ff;
+}
+
+.list-icon-text {
+  font-size: 32rpx;
+}
+
+/* 版本信息 */
+.version-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.version-text {
+  font-size: 20rpx;
+  color: #999999;
+}
+
+/* 退出登录按钮 */
+.logout-section {
+  padding: 0 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.logout-btn {
+  width: 100%;
+  height: 80rpx;
+  background-color: #ffffff;
+  color: #ff4d4f;
+  font-size: 24rpx;
+  border-radius: 40rpx;
+  border: 1rpx solid #ff4d4f;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #fff1f0;
+  box-shadow: 0 4rpx 12rpx rgba(255, 77, 79, 0.3);
+}
+
+.logout-btn::after {
+  border-radius: 40rpx;
+  border: 1rpx solid #ff4d4f;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+  .user-name {
+    font-size: 26rpx;
+  }
+  
+  .user-phone {
+    font-size: 20rpx;
+  }
+  
+  .stats-value {
+    font-size: 28rpx;
+  }
+  
+  .stats-label {
+    font-size: 20rpx;
+  }
+  
+  .fund-value {
+    font-size: 26rpx;
+  }
+  
+  .menu-text {
+    font-size: 20rpx;
+  }
+  
+  .list-text {
+    font-size: 22rpx;
+  }
+  
+  .menu-icon-text {
+    font-size: 36rpx;
+  }
+  
+  .list-icon-text {
+    font-size: 28rpx;
+  }
+}

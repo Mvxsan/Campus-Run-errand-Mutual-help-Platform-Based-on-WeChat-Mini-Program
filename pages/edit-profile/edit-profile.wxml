@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="edit-profile-form">
+    <view class="form-header">
+      <text class="form-title">编辑个人资料</text>
+    </view>
+    
+    <view class="form-body">
+      <!-- 头像设置 -->
+      <view class="form-item">
+        <view class="form-label">头像</view>
+        <view class="avatar-uploader">
+          <image class="avatar-img" src="{{userInfo.avatar && (userInfo.avatar.indexOf('http://tmp/') === 0 || userInfo.avatar.indexOf('_tmp_') > 0) ? 'https://img.icons8.com/color/48/000000/user.png' : userInfo.avatar || 'https://img.icons8.com/color/48/000000/user.png'}}" mode="aspectFill"></image>
+          <view class="avatar-upload-btn" bindtap="chooseAvatar">
+            <text class="upload-text">更换头像</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 昵称设置 -->
+      <view class="form-item">
+        <view class="form-label">昵称</view>
+        <input class="form-input" placeholder="请输入昵称" bindinput="handleNickNameInput" value="{{userInfo.nickname}}"/>
+      </view>
+      
+      <!-- 手机号（只读） -->
+      <view class="form-item">
+        <view class="form-label">手机号</view>
+        <input class="form-input" placeholder="请输入手机号" value="{{userInfo.phone}}" disabled/>
+      </view>
+      
+      <button class="save-btn" bindtap="handleSave">保存修改</button>
+    </view>
+  </view>
+</view>

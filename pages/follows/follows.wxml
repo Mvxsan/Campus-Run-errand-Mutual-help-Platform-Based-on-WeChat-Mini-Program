@@ -1,0 +1,31 @@
+<view class="container">
+  <!-- 标题栏 -->
+  <view class="header">
+    <text class="header-title">我的关注</text>
+  </view>
+  
+  <!-- 关注列表 -->
+  <view class="follows-list" wx:if="{{follows.length > 0}}">
+    <block wx:for="{{follows}}" wx:key="id">
+      <view class="follow-item" bindtap="navigateToUserInfo" data-id="{{item.id}}" data-nickname="{{item.nickname}}">
+        <view class="follow-avatar">
+          <image src="{{item.avatar}}" mode="aspectFill"></image>
+        </view>
+        <view class="follow-info">
+          <text class="follow-name">{{item.nickname}}</text>
+          <text class="follow-phone">{{item.phone}}</text>
+        </view>
+        <view class="follow-action">
+          <button class="unfollow-btn" bindtap="handleUnfollow" data-id="{{item.id}}">取消关注</button>
+        </view>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="empty-state" wx:else>
+    <text class="empty-icon">👥</text>
+    <text class="empty-text">暂无关注用户</text>
+    <text class="empty-subtext">去首页发现更多有趣的人吧</text>
+  </view>
+</view>

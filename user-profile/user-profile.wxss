@@ -1,0 +1,300 @@
+/* user-profile.wxss */
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 导航栏 */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+  background-color: #ffffff;
+  padding: 0 32rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-left {
+  width: 44rpx;
+}
+
+.nav-back {
+  font-size: 36rpx;
+  color: #333333;
+  font-weight: bold;
+}
+
+.nav-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.nav-right {
+  width: 44rpx;
+}
+
+/* 用户信息区域 */
+.user-info-section {
+  display: flex;
+  align-items: center;
+  padding: 40rpx 32rpx;
+  background-color: #ffffff;
+  margin-bottom: 16rpx;
+}
+
+.user-avatar {
+  margin-right: 32rpx;
+}
+
+.avatar-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.user-id {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.follow-btn-container {
+  margin-left: 24rpx;
+}
+
+.follow-btn {
+  padding: 12rpx 32rpx;
+  background-color: #1890ff;
+  color: #ffffff;
+  font-size: 24rpx;
+  border-radius: 24rpx;
+  border: none;
+}
+
+.follow-btn::after {
+  border-radius: 24rpx;
+}
+
+.unfollow-btn {
+  padding: 12rpx 32rpx;
+  background-color: #f0f0f0;
+  color: #666666;
+  font-size: 24rpx;
+  border-radius: 24rpx;
+  border: none;
+}
+
+.unfollow-btn::after {
+  border-radius: 24rpx;
+}
+
+/* 统计数据区域 */
+.stats-section {
+  background-color: #ffffff;
+  padding: 32rpx;
+  margin-bottom: 16rpx;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.stats-item {
+  flex: 1;
+}
+
+.stats-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* 发布任务列表 */
+.tasks-section {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 32rpx;
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.task-item {
+  padding: 24rpx;
+  border: 1rpx solid #f0f0f0;
+  border-radius: 16rpx;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.task-item:hover {
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  transform: translateY(-2rpx);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+
+.task-title {
+  flex: 1;
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-right: 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.task-reward {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.task-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.task-type {
+  font-size: 22rpx;
+  color: #666666;
+}
+
+.task-status {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+  background-color: #f0f0f0;
+  color: #666666;
+}
+
+.task-time {
+  font-size: 20rpx;
+  color: #999999;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+  color: #999999;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+  .user-info-section {
+    padding: 32rpx 24rpx;
+  }
+  
+  .user-name {
+    font-size: 28rpx;
+  }
+  
+  .user-id {
+    font-size: 22rpx;
+  }
+  
+  .stats-section {
+    padding: 24rpx;
+  }
+  
+  .tasks-section {
+    padding: 24rpx;
+  }
+  
+  .task-title {
+    font-size: 24rpx;
+  }
+  
+  .task-reward {
+    font-size: 26rpx;
+  }
+}

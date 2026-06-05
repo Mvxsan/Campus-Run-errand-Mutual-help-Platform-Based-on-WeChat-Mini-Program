@@ -1,0 +1,36 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-left" bindtap="navigateBack">
+      <text class="nav-back">←</text>
+    </view>
+    <view class="nav-title">我的关注</view>
+    <view class="nav-right"></view>
+  </view>
+  
+  <!-- 关注列表 -->
+  <view class="follows-section">
+    <view class="section-header">
+      <text class="section-title">关注的用户</text>
+      <text class="section-count">{{followingList.length}} 人</text>
+    </view>
+    
+    <view class="follows-list">
+      <block wx:for="{{followingList}}" wx:key="id">
+        <view class="follow-item" bindtap="navigateToUserProfile" data-user-id="{{item.id}}" data-user-name="{{item.nickname}}">
+          <image class="user-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+          <text class="user-name">{{item.nickname}}</text>
+          <button class="unfollow-btn" bindtap="handleUnfollow" data-user-id="{{item.id}}">已关注</button>
+          <text class="arrow-icon">›</text>
+        </view>
+      </block>
+      
+      <!-- 空状态 -->
+      <view wx:if="{{followingList.length === 0}}" class="empty-state">
+        <text class="empty-icon">👥</text>
+        <text class="empty-text">暂无关注的用户</text>
+        <text class="empty-subtext">关注其他用户，查看他们的任务动态</text>
+      </view>
+    </view>
+  </view>
+</view>

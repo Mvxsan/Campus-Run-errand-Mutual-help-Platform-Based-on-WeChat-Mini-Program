@@ -1,0 +1,58 @@
+<view class="container">
+  <view class="header">
+    <view class="back-btn" bindtap="navigateBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">我的评价</text>
+    <view class="header-right"></view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab {{activeTab === 'received' ? 'active' : ''}}" bindtap="switchTab" data-tab="received">
+      <text class="tab-text">收到的评价</text>
+    </view>
+    <view class="tab {{activeTab === 'given' ? 'active' : ''}}" bindtap="switchTab" data-tab="given">
+      <text class="tab-text">发出的评价</text>
+    </view>
+  </view>
+
+  <scroll-view class="review-list" scroll-y="true">
+    <view wx:if="{{reviews.length === 0}}" class="empty-container">
+      <text class="empty-text">暂无评价</text>
+    </view>
+
+    <view wx:for="{{reviews}}" wx:key="id" class="review-item">
+      <view class="review-header">
+        <image class="reviewer-avatar" src="{{item.reviewer.avatar ? (item.reviewer.avatar.indexOf('http') === 0 ? item.reviewer.avatar : 'http://localhost:8881' + item.reviewer.avatar) : 'https://img.icons8.com/color/48/000000/user.png'}}" mode="aspectFill"></image>
+        <view class="reviewer-info">
+          <text class="reviewer-name">{{item.reviewer.nickname}}</text>
+          <text class="review-role">{{item.role === 'publisher' ? '发布者' : '接单者'}}</text>
+        </view>
+        <view class="review-time">{{formatTime(item.createdAt)}}</view>
+      </view>
+
+      <view class="task-info">
+        <text class="task-title">{{item.task.title}}</text>
+        <text class="task-reward">¥{{item.task.reward}}</text>
+      </view>
+
+      <view class="review-rating">
+        <view class="stars">
+          <text wx:for="{{5}}" wx:key="index" class="star {{index < item.rating ? 'active' : ''}}">★</text>
+        </view>
+      </view>
+
+      <view wx:if="{{item.tags && item.tags.length > 0}}" class="review-tags">
+        <view wx:for="{{item.tags}}" wx:key="index" class="tag-item">{{item}}</view>
+      </view>
+
+      <view wx:if="{{item.content}}" class="review-content">
+        <text class="content-text">{{item.content}}</text>
+      </view>
+
+      <view wx:if="{{item.images && item.images.length > 0}}" class="review-images">
+        <image wx:for="{{item.images}}" wx:key="index" class="review-image" src="{{item}}" mode="aspectFill" wx:if="{{item}}"></image>
+      </view>
+    </view>
+  </scroll-view>
+</view>

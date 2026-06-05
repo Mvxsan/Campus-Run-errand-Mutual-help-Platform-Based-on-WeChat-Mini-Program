@@ -1,0 +1,103 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="back-btn" bindtap="navigateBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">用户信息</text>
+    <view class="header-right"></view>
+  </view>
+  
+  <!-- 用户基本信息 -->
+  <view class="user-info-section">
+    <view class="user-avatar">
+      <image class="avatar-img" src="{{userInfo.avatar && (userInfo.avatar.indexOf('http://tmp/') === 0 || userInfo.avatar.indexOf('_tmp_') > 0) ? 'https://img.icons8.com/color/48/000000/user.png' : userInfo.avatar || 'https://img.icons8.com/color/48/000000/user.png'}}" mode="aspectFill"></image>
+    </view>
+    <view class="user-details">
+      <text class="user-name">{{userInfo.nickname}}</text>
+      <text class="user-role">{{userInfo.role === 1 ? '管理员' : '普通用户'}}</text>
+    </view>
+    <view class="action-buttons">
+      <button class="chat-btn" bindtap="navigateToChat">
+        <text class="chat-icon">💬</text>
+        <text class="chat-text">发消息</text>
+      </button>
+      <button wx:if="{{!isSelf && !isFollowing}}" class="follow-btn" bindtap="handleFollow">
+        <text class="follow-icon">➕</text>
+        <text class="follow-text">关注</text>
+      </button>
+      <button wx:elif="{{!isSelf && isFollowing}}" class="unfollow-btn" bindtap="handleUnfollow">
+        <text class="unfollow-icon">✓</text>
+        <text class="unfollow-text">已关注</text>
+      </button>
+      <button wx:if="{{!isSelf && !isLiked}}" class="like-btn" bindtap="handleLike">
+        <text class="like-icon">👍</text>
+        <text class="like-text">点赞</text>
+        <text class="like-count">{{userInfo.likesCount || 0}}</text>
+      </button>
+      <button wx:elif="{{!isSelf && isLiked}}" class="liked-btn" bindtap="handleLike">
+        <text class="like-icon">👍</text>
+        <text class="like-text">已点赞</text>
+        <text class="like-count">{{userInfo.likesCount || 0}}</text>
+      </button>
+    </view>
+  </view>
+  
+  <!-- 用户统计信息 -->
+  <view class="stats-section">
+    <view class="stats-grid">
+      <view class="stats-item">
+        <text class="stats-value">{{userStats.publishedTasks}}</text>
+        <text class="stats-label">发布任务</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-value">{{userStats.acceptedTasks}}</text>
+        <text class="stats-label">接取任务</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-value">{{userStats.completedTasks}}</text>
+        <text class="stats-label">完成任务</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-value">{{userRating > 0 ? (userRating + '.0') : '暂无评分'}}</text>
+        <text class="stats-label">评分</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 用户发布的任务列表 -->
+  <view class="tasks-section">
+    <view class="section-header">
+      <text class="section-title">发布的任务</text>
+      <text class="section-more" bindtap="navigateToUserTasks">查看更多</text>
+    </view>
+    <view class="tasks-list">
+      <block wx:for="{{publishedTasks}}" wx:key="id">
+        <view class="task-item" bindtap="navigateToTaskDetail" data-id="{{item.id}}">
+          <view class="task-info">
+            <text class="task-title">{{item.title}}</text>
+            <text class="task-reward">¥{{item.reward}}</text>
+          </view>
+          <text class="task-status" wx:if="{{item.status === 0}}">待接单</text>
+          <text class="task-status status-accepted" wx:elif="{{item.status === 1}}">已接单</text>
+          <text class="task-status status-picked" wx:elif="{{item.status === 2}}">已取货</text>
+          <text class="task-status status-delivered" wx:elif="{{item.status === 3}}">已送达</text>
+          <text class="task-status status-completed" wx:elif="{{item.status === 4}}">已完成</text>
+          <text class="task-status status-banned" wx:elif="{{item.status === 5 && item.cancelType === 2}}">已禁止</text>
+          <text class="task-status status-canceled" wx:elif="{{item.status === 5}}">已取消</text>
+        </view>
+      </block>
+      <view wx:if="{{publishedTasks.length === 0}}" class="empty-tasks">
+        <text class="empty-text">暂无发布的任务</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 管理员角色管理按钮 (仅admin账号可见) -->
+  <view class="admin-role-buttons" wx:if="{{isAdmin && !isSelf && userInfo.phone === 'admin'}}">
+    <button class="role-btn" bindtap="handleToggleAdminRole" data-role="{{userInfo.role}}">
+      {{userInfo.role === 1 ? '降级为普通用户' : '升级为管理员'}}
+    </button>
+  </view>
+
+</view>

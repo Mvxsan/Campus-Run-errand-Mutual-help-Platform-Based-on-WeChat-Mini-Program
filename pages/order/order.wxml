@@ -1,0 +1,92 @@
+<scroll-view class="container" scroll-y type="list" bindrefresherpulling="onPullDownRefresh" bindrefresherrefresh="onPullDownRefresh" refresher-enabled="true" refresher-background="#f5f5f5" refresher-triggered="{{refresherTriggered}}">
+  <!-- 订单类型切换 (所有用户可见) -->
+  <view class="order-tabs">
+    <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">
+      <text class="tab-text">待接单</text>
+    </view>
+    <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">
+      <text class="tab-text">进行中</text>
+    </view>
+    <view class="tab-item {{activeTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">
+      <text class="tab-text">已完成</text>
+    </view>
+    <!-- 已禁止订单标签 (仅管理员可见) -->
+    <view class="tab-item {{activeTab === 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3" wx:if="{{isAdmin}}">
+      <text class="tab-text">已禁止</text>
+    </view>
+    <view class="tab-item {{activeTab === (isAdmin ? 4 : 3) ? 'active' : ''}}" bindtap="switchTab" data-index="{{isAdmin ? 4 : 3}}">
+      <text class="tab-text">全部</text>
+    </view>
+  </view>
+  
+  <!-- 未登录提示 -->
+  <view wx:if="{{!isLoggedIn}}" class="login-prompt">
+    <view class="prompt-icon">
+      <image src="https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0" mode="aspectFill"></image>
+    </view>
+    <text class="prompt-text">暂未登录，请登录后查看</text>
+    <button class="login-btn" bindtap="navigateToLogin">去登录</button>
+  </view>
+  
+  <!-- 订单列表 (仅登录用户可见) -->
+  <view wx:else class="order-list">
+    <block wx:for="{{orderList}}" wx:key="id">
+      <view class="order-item fade-in-up" bindtap="navigateToOrderDetail" data-id="{{item.id}}">
+        <view class="order-header">
+          <text class="order-id">订单号：{{item.id}}</text>
+          <text class="order-status" wx:class="order-status-{{item.statusCode}}">{{item.status}}</text>
+        </view>
+        
+        <view class="order-content">
+          <text class="order-title">{{item.title}}</text>
+          <view class="order-info">
+            <view class="info-item">
+              <text class="info-icon">📍</text>
+              <text class="info-label">地点：</text>
+              <text class="info-value">{{item.location}}</text>
+            </view>
+            <view class="info-item">
+              <text class="info-icon">💰</text>
+              <text class="info-label">报酬：</text>
+              <text class="info-value reward">¥{{item.reward}}</text>
+            </view>
+            <view class="info-item">
+              <text class="info-icon">⏰</text>
+              <text class="info-label">时间：</text>
+              <text class="info-value">{{item.time}}</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="order-footer">
+          <view class="publisher-info">
+            <image wx:if="{{item.publisherAvatar}}" class="publisher-avatar" src="{{item.publisherAvatar}}" mode="aspectFill"></image>
+            <text wx:else class="publisher-icon">👤</text>
+            <text class="order-publisher">{{item.publisher}}</text>
+          </view>
+          <view class="order-actions">
+            <button wx:if="{{item.statusCode === 0 || item.statusCode === 1}}" class="action-btn danger" catchtap="handleCancelOrder" data-id="{{item.id}}">取消订单</button>
+            <button wx:elif="{{item.statusCode === 2 && item.originalStatus === 3}}" class="action-btn primary" catchtap="handleCompleteOrder" data-id="{{item.id}}">确认完成</button>
+            <text wx:elif="{{item.statusCode === 4 && item.acceptorId == userInfo.id}}" class="waiting-text">等待发布者确认</text>
+            <button wx:elif="{{item.statusCode === 4 && item.publisherId == userInfo.id}}" class="action-btn primary" catchtap="handleConfirmOrder" data-id="{{item.id}}">确认收货</button>
+            <button wx:if="{{isAdmin && item.statusCode === 5}}" class="action-btn primary" catchtap="handleRestoreOrder" data-id="{{item.id}}">恢复订单</button>
+            <button wx:if="{{isAdmin && item.statusCode !== 2 && item.statusCode !== 5 && (item.originalStatus !== 6)}}" class="action-btn warning" catchtap="handleBanOrder" data-id="{{item.id}}">禁止订单</button>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view wx:if="{{orderList.length === 0}}" class="empty-state">
+      <text class="empty-icon">📦</text>
+      <text class="empty-text">暂无订单</text>
+      <text class="empty-subtext">
+        {{activeTab === 0 ? '暂无待接单的任务' : 
+          activeTab === 1 ? '暂无进行中的任务' : 
+          activeTab === 2 ? '暂无已完成的任务' : 
+          activeTab === 3 ? '暂无已禁止的任务' : '暂无订单记录'}}
+      </text>
+      <button wx:if="{{activeTab === 0}}" class="empty-btn" bindtap="navigateToPublish">发布任务</button>
+    </view>
+  </view>
+</scroll-view>

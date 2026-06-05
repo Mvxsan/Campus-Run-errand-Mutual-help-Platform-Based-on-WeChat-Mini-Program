@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="login-form">
+    <view class="form-header">
+      <text class="form-title">登录</text>
+      <text class="form-subtitle">校园跑腿互助系统</text>
+    </view>
+    
+    <view class="form-body">
+      <view class="form-item">
+        <view class="form-label">手机号</view>
+        <input class="form-input" placeholder="请输入手机号" bindinput="handlePhoneInput" value="{{phone}}"/>
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">密码</view>
+        <input class="form-input" placeholder="请输入密码" password bindinput="handlePasswordInput" value="{{password}}"/>
+      </view>
+      
+      <button class="login-btn" bindtap="handleLogin">登录</button>
+      
+      <view class="form-footer">
+        <text class="register-link" bindtap="navigateToRegister">立即注册</text>
+      </view>
+    </view>
+  </view>
+</view>

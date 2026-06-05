@@ -1,0 +1,198 @@
+<view class="container">
+  <!-- 顶部区域 -->
+  <view class="header">
+    <view class="header-left">
+      <text class="header-title">发布任务</text>
+    </view>
+    <view class="header-right">
+      <view class="help-icon" bindtap="showHelp">
+        <text class="help-text">❓</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 核心信息区 -->
+  <view class="content">
+    <!-- 任务信息卡片 -->
+    <view class="card">
+      <view class="card-header">
+        <text class="card-icon">📦</text>
+        <text class="card-title">任务信息</text>
+      </view>
+      <view class="card-body">
+        <view class="form-item">
+          <view class="input-with-icon">
+            <text class="input-icon">📝</text>
+            <input class="form-input"  bindinput="handleTitleInput" value="{{title}}"/>
+          </view>
+        </view>
+        
+        <view class="form-item">
+          <view class="type-selector">
+            <text class="type-label">任务类型</text>
+            <view class="type-tabs">
+              <view wx:for="{{taskTypes}}" wx:key="index" 
+                    class="type-tab {{selectedType === item ? 'active' : ''}}" 
+                    bindtap="selectType" data-type="{{item}}">
+                <text class="tab-text">{{item}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 地点信息卡片 -->
+    <view class="card">
+      <view class="card-header">
+        <text class="card-icon">📍</text>        <text class="card-title">地点信息</text>
+      </view>
+      <view class="card-body">
+        <view class="location-section">
+          <view class="location-item">
+            <text class="location-label">起点</text>
+            <view class="input-with-icon">
+              <input class="form-input" placeholder="请输入起点" bindinput="handleStartLocationInput" value="{{startLocation}}"/>
+              <view class="location-icon" bindtap="getCurrentLocation" data-type="start">
+                <text class="icon-text">📍</text>
+              </view>
+            </view>
+          </view>
+          
+          <view class="location-arrow">→</view>
+          
+          <view class="location-item">
+            <text class="location-label">终点</text>
+            <view class="input-with-icon">
+              <input class="form-input" placeholder="请输入终点" bindinput="handleEndLocationInput" value="{{endLocation}}"/>
+              <view class="location-icon" bindtap="getCurrentLocation" data-type="end">
+                <text class="icon-text">📍</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        <view class="common-locations">
+          <text class="common-label">常用地点：</text>
+          <view class="common-tags">
+            <view wx:for="{{commonLocations}}" wx:key="index" 
+                  class="common-tag" 
+                  bindtap="selectCommonLocation" data-location="{{item}}">
+              <text class="tag-text">{{item}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 时间与报酬卡片 -->
+    <view class="card">
+      <view class="card-header">
+        <text class="card-icon">⏰</text>
+        <text class="card-title">时间与报酬</text>
+      </view>
+      <view class="card-body">
+        <view class="form-item">
+          <text class="time-label">任务时间</text>
+          <view class="time-options">
+            <view wx:for="{{timeOptions}}" wx:key="index" 
+                  class="time-option {{selectedTimeOption === item.value ? 'active' : ''}}" 
+                  bindtap="selectTimeOption" data-value="{{item.value}}">
+              <text class="option-text">{{item.label}}</text>
+            </view>
+            <view class="time-option {{selectedTimeOption === 'custom' ? 'active' : ''}}" 
+                  bindtap="selectTimeOption" data-value="custom">
+              <text class="option-text">自定义</text>
+            </view>
+          </view>
+          
+          <view wx:if="{{selectedTimeOption === 'custom'}}" class="custom-time">
+            <view class="time-pickers">
+              <view class="time-picker-item">
+                <text class="picker-label">开始时间</text>
+                <picker mode="date" value="{{startDate}}" start="{{minDate}}" end="{{maxDate}}" bindchange="handleStartDateChange">
+                  <view class="form-picker">
+                    <text class="picker-text">{{startDateText}}</text>
+                  </view>
+                </picker>
+                <picker mode="time" value="{{startTimeValue}}" bindchange="handleStartTimeChange">
+                  <view class="form-picker">
+                    <text class="picker-text">{{startTimeText}}</text>
+                  </view>
+                </picker>
+              </view>
+              <view class="time-picker-item">
+                <text class="picker-label">结束时间</text>
+                <picker mode="date" value="{{endDate}}" start="{{minDate}}" end="{{maxDate}}" bindchange="handleEndDateChange">
+                  <view class="form-picker">
+                    <text class="picker-text">{{endDateText}}</text>
+                  </view>
+                </picker>
+                <picker mode="time" value="{{endTimeValue}}" bindchange="handleEndTimeChange">
+                  <view class="form-picker">
+                    <text class="picker-text">{{endTimeText}}</text>
+                  </view>
+                </picker>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 报酬输入 -->
+        <view class="form-item">
+          <text class="time-label">任务报酬</text>
+          <view class="reward-input-section">
+            <view class="input-with-icon reward-input-wrapper">
+              <text class="input-icon">💰</text>
+              <input class="form-input reward-input" type="number" placeholder="请输入报酬金额" bindinput="handleRewardInput" value="{{reward}}"/>
+              <text class="reward-unit">元</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 任务描述 -->
+    <view class="card">
+      <view class="card-header">
+        <text class="card-icon">📄</text>
+        <text class="card-title">任务描述</text>
+      </view>
+      <view class="card-body">
+        <textarea class="form-textarea" placeholder="请输入任务详细描述，如物品信息、特殊要求等" bindinput="handleDescriptionInput" value="{{description}}"/>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button class="cancel-btn" bindtap="handleCancel">取消</button>
+      <button class="publish-btn" bindtap="handlePublish">发布任务</button>
+    </view>
+  </view>
+
+  <!-- 帮助弹窗 -->
+  <view wx:if="{{showHelpModal}}" class="help-modal">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">常见问题</text>
+        <view class="close-btn" bindtap="closeHelp">
+          <text class="close-text">×</text>
+        </view>
+      </view>
+      <view class="modal-body">
+        <view class="faq-item">
+          <text class="faq-question">如何填写任务地点？</text>
+          <text class="faq-answer">请填写详细的起点和终点地址，如宿舍号、教学楼名称等，以便接单者准确找到位置。</text>
+        </view>
+        <view class="faq-item">
+          <text class="faq-question">报酬参考标准是什么？</text>
+          <text class="faq-answer">同类型任务平均报酬为5-8元，可根据任务难度、距离和紧急程度适当调整。</text>
+        </view>
+        <view class="faq-item">
+          <text class="faq-question">如何提高任务接单率？</text>
+          <text class="faq-answer">填写详细的任务描述，设置合理的报酬，选择合适的时间，这些都能提高任务的接单率。</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

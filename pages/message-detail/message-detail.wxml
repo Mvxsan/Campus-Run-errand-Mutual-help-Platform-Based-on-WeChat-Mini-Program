@@ -1,0 +1,29 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="back-btn" bindtap="navigateBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">消息详情</text>
+    <view class="header-right"></view>
+  </view>
+  
+  <!-- 消息内容 -->
+  <view class="message-content">
+    <view class="message-header">
+      <text class="message-title">{{message.title}}</text>
+      <text class="message-time">{{message.time}}</text>
+    </view>
+    <text class="message-sender" wx:if="{{message.sender}}">发送者：{{message.sender}}</text>
+    <text class="message-body">{{message.body}}</text>
+    <view class="message-footer" wx:if="{{message.type === 1 && message.orderStatus}}">
+      <text class="order-status-tag" wx:class="order-status-{{message.orderStatus}}">
+        {{message.orderStatus === 0 ? '待接单' : 
+           message.orderStatus === 1 ? '已接单' : 
+           message.orderStatus === 2 ? '已取货' : 
+           message.orderStatus === 3 ? '已取消' : 
+           message.orderStatus === 4 ? '已完成' : ''}}
+      </text>
+    </view>
+  </view>
+</view>

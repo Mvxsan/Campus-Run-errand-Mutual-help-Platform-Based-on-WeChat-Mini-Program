@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.wxml": "html",
+    "*.wxss": "css"
+  },
+  "java.compile.nullAnalysis.mode": "disabled"
+}

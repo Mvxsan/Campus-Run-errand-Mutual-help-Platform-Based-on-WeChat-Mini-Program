@@ -1,0 +1,537 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 页面头部 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80rpx;
+  padding: 0 20rpx;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.back-btn {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.back-icon {
+  font-size: 32rpx;
+  color: #333333;
+}
+
+.header-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.header-right {
+  width: 60rpx;
+}
+
+/* 任务状态 */
+.status-section {
+  padding: 20rpx;
+  background-color: #ffffff;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 12rpx 24rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.status-desc {
+  font-size: 20rpx;
+  color: #666666;
+  text-align: center;
+}
+
+.status-text {
+  color: #ffffff;
+}
+
+/* 任务信息卡片 */
+.task-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  margin: 0 20rpx 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.task-card:hover {
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.task-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+  flex: 1;
+  margin-right: 20rpx;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.task-reward {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+  flex-shrink: 0;
+}
+
+.card-content {
+  padding: 24rpx;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 20rpx;
+  align-items: flex-start;
+  gap: 10rpx;
+}
+
+.info-icon {
+  font-size: 24rpx;
+  margin-top: 2rpx;
+}
+
+.info-label {
+  font-size: 24rpx;
+  color: #666666;
+  min-width: 120rpx;
+  flex-shrink: 0;
+  margin-top: 2rpx;
+}
+
+.info-value {
+  font-size: 24rpx;
+  color: #333333;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.description-item {
+  background-color: #fafafa;
+  padding: 15rpx;
+  border-radius: 12rpx;
+  margin-bottom: 10rpx;
+}
+
+.description {
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.6;
+}
+
+.reward-value {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+/* 操作按钮区域 */
+.action-section {
+  padding: 20rpx;
+  background-color: #ffffff;
+  margin-top: auto;
+  border-top: 1rpx solid #f0f0f0;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.action-btn {
+  width: 100%;
+  height: 88rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border-radius: 44rpx;
+  transition: all 0.3s ease;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn::after {
+  border-radius: 44rpx;
+}
+
+.action-btn.primary {
+  background-color: #1890ff;
+  color: #ffffff;
+}
+
+.action-btn.primary:hover {
+  background-color: #40a9ff;
+  box-shadow: 0 6rpx 20rpx rgba(24, 144, 255, 0.4);
+  transform: translateY(-2rpx);
+}
+
+.action-btn.danger {
+  background-color: #ff4d4f;
+  color: #ffffff;
+}
+
+.action-btn.danger:hover {
+  background-color: #ff7875;
+  box-shadow: 0 6rpx 20rpx rgba(255, 77, 79, 0.4);
+  transform: translateY(-2rpx);
+}
+
+/* 不可接单提示 */
+.no-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  background-color: #f0f0f0;
+  border-radius: 44rpx;
+  margin-bottom: 20rpx;
+}
+
+.no-action-text {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* 任务流程进度 */
+.process-section {
+  margin: 0 20rpx 20rpx;
+  padding: 24rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.process-title {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20rpx;
+}
+
+.process-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  flex: 1;
+}
+
+.step-dot {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  border: 4rpx solid #ffffff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.process-step.active .step-dot {
+  background-color: #1890ff;
+  box-shadow: 0 2rpx 12rpx rgba(24, 144, 255, 0.4);
+}
+
+.step-text {
+  font-size: 20rpx;
+  color: #999999;
+  transition: all 0.3s ease;
+}
+
+.process-step.active .step-text {
+  color: #1890ff;
+  font-weight: bold;
+}
+
+.process-line {
+  flex: 1;
+  height: 4rpx;
+  background-color: #f0f0f0;
+  margin: 0 10rpx;
+  transition: all 0.3s ease;
+}
+
+.process-line.active {
+  background-color: #1890ff;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.task-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.process-section {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+  .info-icon {
+    font-size: 22rpx;
+  }
+  
+  .info-label {
+    font-size: 22rpx;
+    min-width: 100rpx;
+  }
+  
+  .info-value {
+    font-size: 22rpx;
+  }
+  
+  .task-title {
+    font-size: 26rpx;
+  }
+  
+  .task-reward {
+    font-size: 28rpx;
+  }
+  
+  .action-btn {
+    height: 80rpx;
+    font-size: 26rpx;
+  }
+  
+  .process-steps {
+    padding: 0 10rpx;
+  }
+  
+  .step-text {
+    font-size: 18rpx;
+  }
+}
+
+/* 发布者信息样式 */
+.publisher-info {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex: 1;
+}
+
+.publisher-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}
+
+.publisher-info:active {
+  opacity: 0.8;
+}
+
+/* 评价部分样式 */
+.reviews-section {
+  margin: 0 20rpx 20rpx;
+  padding: 24rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.reviews-title {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20rpx;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.review-item {
+  padding: 20rpx;
+  background-color: #f9f9f9;
+  border-radius: 12rpx;
+  border-left: 4rpx solid #1890ff;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.reviewer-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}
+
+.reviewer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.reviewer-name {
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.reviewer-role {
+  font-size: 18rpx;
+  color: #1890ff;
+  font-weight: 500;
+}
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.rating-stars {
+  font-size: 20rpx;
+  color: #ffd700;
+}
+
+.rating-value {
+  font-size: 20rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.review-content {
+  margin-bottom: 12rpx;
+}
+
+.content-text {
+  font-size: 22rpx;
+  color: #333333;
+  line-height: 1.4;
+}
+
+.review-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-bottom: 12rpx;
+}
+
+.tag {
+  padding: 6rpx 16rpx;
+  background-color: #e6f7ff;
+  color: #1890ff;
+  font-size: 18rpx;
+  border-radius: 16rpx;
+}
+
+.review-time {
+  font-size: 18rpx;
+  color: #999999;
+  text-align: right;
+}
+
+/* 评价图片样式 */
+.review-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.review-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  object-fit: cover;
+  background-color: #f0f0f0;
+}
+
+/* 追加评价样式 */
+.additional-review {
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #f0f0f0;
+  border-left: 4rpx solid #e6f7ff;
+  padding-left: 16rpx;
+}
+
+.additional-content {
+  margin-bottom: 8rpx;
+}
+
+.additional-time {
+  font-size: 16rpx;
+  color: #999999;
+  text-align: right;
+}

@@ -1,0 +1,595 @@
+/* 全局样式重置 */
+.container,
+.header,
+.content,
+.card,
+.form-item,
+.input-with-icon,
+.type-tabs,
+.location-section,
+.reward-section,
+.time-pickers,
+.action-buttons {
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+/* 顶部区域样式 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+  height: 100rpx;
+  background-color: #ffffff;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.help-icon {
+  width: 50rpx;
+  height: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7fa;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.help-text {
+  font-size: 24rpx;
+  color: #1677ff;
+}
+
+/* 核心内容区域样式 */
+.content {
+  flex: 1;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+/* 卡片样式 */
+.card {
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  transform: translateY(-2rpx);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #f5f7fa;
+  border-bottom: 1rpx solid #e8e8e8;
+}
+
+.card-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.card-title {
+  font-size: 20rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.card-body {
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+/* 表单项目样式 */
+.form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+/* 带图标的输入框 */
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 20rpx;
+  font-size: 24rpx;
+  color: #1677ff;
+  z-index: 1;
+}
+
+.form-input {
+  height: 80rpx;
+  border: 1rpx solid #e8e8e8;
+  border-radius: 8rpx;
+  padding: 0 20rpx 0 60rpx;
+  font-size: 24rpx;
+  color: #333333;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #1677ff;
+  box-shadow: 0 0 0 2rpx rgba(22, 119, 255, 0.1);
+  transform: translateY(-1rpx);
+}
+
+.form-textarea {
+  min-height: 150rpx;
+  border: 1rpx solid #e8e8e8;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 24rpx;
+  color: #333333;
+  resize: none;
+  transition: all 0.3s ease;
+}
+
+.form-textarea:focus {
+  border-color: #1677ff;
+  box-shadow: 0 0 0 2rpx rgba(22, 119, 255, 0.1);
+}
+
+/* 任务类型选择器样式 */
+.type-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.type-label {
+  font-size: 16rpx;
+  color: #666666;
+}
+
+.type-tabs {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.type-tab {
+  padding: 12rpx 24rpx;
+  border: 1rpx solid #e8e8e8;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  color: #666666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.type-tab:hover {
+  border-color: #1677ff;
+  color: #1677ff;
+}
+
+.type-tab.active {
+  background-color: #1677ff;
+  border-color: #1677ff;
+  color: #ffffff;
+}
+
+/* 地点信息样式 */
+.location-section {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.location-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.location-label {
+  font-size: 14rpx;
+  color: #666666;
+}
+
+.location-arrow {
+  font-size: 24rpx;
+  color: #1677ff;
+  font-weight: bold;
+}
+
+.location-icon {
+  position: absolute;
+  right: 20rpx;
+  font-size: 24rpx;
+  color: #1677ff;
+  cursor: pointer;
+}
+
+/* 常用地点样式 */
+.common-locations {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.common-label {
+  font-size: 14rpx;
+  color: #666666;
+}
+
+.common-tags {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.common-tag {
+  padding: 8rpx 16rpx;
+  background-color: #f5f7fa;
+  border: 1rpx solid #e8e8e8;
+  border-radius: 16rpx;
+  font-size: 18rpx;
+  color: #666666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.common-tag:hover {
+  background-color: #e6f7ff;
+  border-color: #91d5ff;
+  color: #1677ff;
+}
+
+/* 时间选择样式 */
+.time-label {
+  font-size: 16rpx;
+  color: #666666;
+}
+
+.time-options {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.time-option {
+  padding: 12rpx 24rpx;
+  border: 1rpx solid #e8e8e8;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  color: #666666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.time-option:hover {
+  border-color: #1677ff;
+  color: #1677ff;
+}
+
+.time-option.active {
+  background-color: #1677ff;
+  border-color: #1677ff;
+  color: #ffffff;
+}
+
+.custom-time {
+  margin-top: 12rpx;
+  padding: 16rpx;
+  background-color: #f5f7fa;
+  border-radius: 8rpx;
+}
+
+.time-pickers {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.time-picker-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.time-picker-item .form-picker {
+  flex: 1;
+}
+
+.time-picker-item picker {
+  display: flex;
+}
+
+.picker-label {
+  font-size: 14rpx;
+  color: #666666;
+}
+
+.form-picker {
+  height: 72rpx;
+  border: 1rpx solid #e8e8e8;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  display: flex;
+  align-items: center;
+  font-size: 20rpx;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-picker:hover {
+  border-color: #1677ff;
+}
+
+.picker-text {
+  flex: 1;
+}
+
+/* 报酬样式 */
+.reward-label {
+  font-size: 16rpx;
+  color: #666666;
+}
+
+.reward-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.reference-price {
+  font-size: 14rpx;
+  color: #999999;
+  margin-left: 60rpx;
+}
+
+.reward-slider {
+  margin-top: 8rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.slider-range {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14rpx;
+  color: #999999;
+  padding: 0 20rpx;
+}
+
+/* 新报酬输入样式 */
+.reward-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.reward-input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.reward-input {
+  flex: 1;
+  padding-right: 80rpx !important;
+}
+
+.reward-unit {
+  position: absolute;
+  right: 20rpx;
+  font-size: 24rpx;
+  color: #333333;
+  font-weight: bold;
+}
+
+.reward-tips {
+  padding: 0 60rpx;
+}
+
+.tip-text {
+  font-size: 14rpx;
+  color: #999999;
+}
+
+/* 操作按钮样式 */
+.action-buttons {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.cancel-btn {
+  flex: 1;
+  height: 80rpx;
+  background-color: #ffffff;
+  border: 1rpx solid #d9d9d9;
+  color: #333333;
+  font-size: 24rpx;
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  border-color: #1677ff;
+  color: #1677ff;
+}
+
+.publish-btn {
+  flex: 2;
+  height: 80rpx;
+  background-color: #1677ff;
+  color: #ffffff;
+  font-size: 24rpx;
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+}
+
+.publish-btn:hover {
+  background-color: #409eff;
+  transform: translateY(-1rpx);
+}
+
+.cancel-btn::after, .publish-btn::after {
+  border-radius: 8rpx;
+}
+
+/* 帮助弹窗样式 */
+.help-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  width: 80%;
+  max-width: 600rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #e8e8e8;
+}
+
+.modal-title {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.close-btn {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.close-text {
+  font-size: 32rpx;
+  color: #999999;
+}
+
+.modal-body {
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.faq-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.faq-question {
+  font-size: 18rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.faq-answer {
+  font-size: 16rpx;
+  color: #666666;
+  line-height: 1.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .location-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16rpx;
+  }
+  
+  .location-arrow {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}
+
+/* 滑块样式覆盖 */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 6rpx;
+  background: #e8e8e8;
+  border-radius: 3rpx;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20rpx;
+  height: 20rpx;
+  background: #1677ff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 8rpx rgba(22, 119, 255, 0.1);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20rpx;
+  height: 20rpx;
+  background: #1677ff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 8rpx rgba(22, 119, 255, 0.1);
+}

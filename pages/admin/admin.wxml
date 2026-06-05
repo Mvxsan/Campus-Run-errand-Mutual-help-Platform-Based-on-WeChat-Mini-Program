@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="admin-header">
+    <text class="admin-title">管理员面板</text>
+  </view>
+  
+  <view class="admin-body">
+    <view class="admin-section">
+      <text class="section-title">用户管理</text>
+      
+      <view class="search-bar">
+        <input placeholder="搜索用户手机号或昵称" bindinput="handleSearch" class="search-input" />
+        <button bindtap="loadUserList" class="reset-btn">重置</button>
+      </view>
+      
+      <view class="user-list">
+        <view wx:for="{{userList}}" wx:key="id" class="user-item">
+          <view class="user-info">
+            <view class="user-avatar" bindtap="navigateToUserInfo" data-id="{{item.id}}">
+              <image src="{{item.avatar || 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLjP4OJQV0xYVYV9LrYb6j8vX4V9QV0xYVYV9LrYb6j8vX4V9QV0xYVYV9LrYb6j8vX4V9QV0xYVYV9LrYb6j8w/132'}}" mode="aspectFill"></image>
+            </view>
+            <text class="user-name">{{item.nickname || item.phone}}</text>
+            <text class="user-phone">{{item.phone}}</text>
+            <text class="user-password">密码: {{item.password}}</text>
+            <text class="user-role">{{item.role === 1 ? '管理员' : '普通用户'}}</text>
+            <text class="user-status">{{item.status === 1 ? '正常' : '禁用'}}</text>
+          </view>
+          
+          <view class="user-actions">
+            <button class="action-btn" bindtap="toggleRole" data-id="{{item.id}}" data-role="{{item.role}}" disabled="{{item.phone === 'admin'}}">
+              {{item.role === 1 ? '取消管理员' : '设为管理员'}}
+            </button>
+            <button class="action-btn" bindtap="toggleStatus" data-id="{{item.id}}" data-status="{{item.status}}" disabled="{{item.phone === 'admin'}}">
+              {{item.status === 1 ? '禁用' : '启用'}}
+            </button>
+            <button class="action-btn delete-btn" bindtap="deleteUser" data-id="{{item.id}}" disabled="{{item.phone === 'admin'}}">
+           
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+</view>

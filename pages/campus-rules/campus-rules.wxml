@@ -1,0 +1,25 @@
+<!-- campus-rules.wxml -->
+<view class="container">
+  <!-- 规则内容区域 -->
+  <view class="rules-content">
+    <view class="rules-header">
+      <text class="rules-title">校园互助规则</text>
+      <text class="rules-update-time">最后更新: {{updateTime}}</text>
+    </view>
+    
+    <view class="rules-body">
+      <view wx:for="{{ruleItems}}" wx:key="index" class="rule-item">
+        <view class="rule-number">{{index + 1}}.</view>
+        <text class="rule-text">{{item}}</text>
+      </view>
+      <view wx:if="{{ruleItems.length === 0}}" class="empty-rules">
+        <text class="empty-text">暂无规则内容</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 管理员编辑按钮 -->
+  <view class="admin-action" wx:if="{{isAdmin}}">
+    <button class="edit-btn" bindtap="navigateToEditRules">编辑规则</button>
+  </view>
+</view>

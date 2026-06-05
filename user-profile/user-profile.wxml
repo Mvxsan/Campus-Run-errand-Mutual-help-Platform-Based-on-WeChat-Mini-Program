@@ -1,0 +1,84 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-left" bindtap="navigateBack">
+      <text class="nav-back">←</text>
+    </view>
+    <view class="nav-title">用户主页</view>
+    <view class="nav-right"></view>
+  </view>
+  
+  <!-- 用户信息区域 -->
+  <view class="user-info-section">
+    <view class="user-avatar">
+      <image class="avatar-img" src="{{userInfo.avatar}}" mode="aspectFill"></image>
+    </view>
+    <view class="user-details">
+      <text class="user-name">{{userInfo.nickname}}</text>
+      <text class="user-id">ID: {{userInfo.id}}</text>
+    </view>
+    <view class="follow-btn-container">
+      <button 
+        wx:if="!isFollowing" 
+        class="follow-btn" 
+        bindtap="handleFollow"
+      >
+        关注
+      </button>
+      <button 
+        wx:else 
+        class="unfollow-btn" 
+        bindtap="handleUnfollow"
+      >
+        已关注
+      </button>
+    </view>
+  </view>
+  
+  <!-- 统计数据区域 -->
+  <view class="stats-section">
+    <view class="stats-grid">
+      <view class="stats-item">
+        <text class="stats-value">{{stats.publishedTasks || 0}}</text>
+        <text class="stats-label">发布任务</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-value">{{stats.acceptedTasks || 0}}</text>
+        <text class="stats-label">接取任务</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-value">{{stats.completedTasks || 0}}</text>
+        <text class="stats-label">完成任务</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 发布任务列表 -->
+  <view class="tasks-section">
+    <view class="section-header">
+      <text class="section-title">发布的任务</text>
+    </view>
+    
+    <view class="task-list">
+      <block wx:for="{{publishedTasks}}" wx:key="id">
+        <view class="task-item" bindtap="navigateToTaskDetail" data-id="{{item.id}}">
+          <view class="task-header">
+            <text class="task-title">{{item.title}}</text>
+            <text class="task-reward">¥{{item.reward}}</text>
+          </view>
+          <view class="task-info">
+            <text class="task-type">{{item.type}}</text>
+            <text class="task-status">{{item.status}}</text>
+          </view>
+          <text class="task-time">{{item.createTime}}</text>
+        </view>
+      </block>
+      
+      <!-- 空状态 -->
+      <view wx:if="{{publishedTasks.length === 0}}" class="empty-state">
+        <text class="empty-icon">📋</text>
+        <text class="empty-text">暂无发布任务</text>
+      </view>
+    </view>
+  </view>
+</view>

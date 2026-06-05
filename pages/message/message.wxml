@@ -1,0 +1,75 @@
+<scroll-view class="container" scroll-y type="list" bindrefresherpulling="onPullDownRefresh" bindrefresherrefresh="onPullDownRefresh" refresher-enabled="true" refresher-background="#f5f5f5" refresher-triggered="{{refresherTriggered}}">
+  <!-- 消息类型切换 (所有用户可见) -->
+  <view class="message-tabs">
+    <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">
+      <text class="tab-icon">📢</text>
+      <text class="tab-text">系统通知</text>
+    </view>
+    <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">
+      <text class="tab-icon">📦</text>
+      <text class="tab-text">订单消息</text>
+    </view>
+    <view class="tab-item {{activeTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">
+      <text class="tab-icon">💬</text>
+      <text class="tab-text">聊天消息</text>
+    </view>
+  </view>
+  
+  <!-- 未登录提示 -->
+  <view wx:if="{{!isLoggedIn}}" class="login-prompt">
+    <view class="prompt-icon">
+      <image src="https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0" mode="aspectFill"></image>
+    </view>
+    <text class="prompt-text">暂未登录，请登录后查看</text>
+    <button class="login-btn" bindtap="navigateToLogin">去登录</button>
+  </view>
+  
+  <!-- 消息列表 (仅登录用户可见) -->
+  <view wx:else class="message-list">
+    <block wx:for="{{messageList}}" wx:key="id">
+      <view class="message-item fade-in-up" bindtap="navigateToMessageDetail" data-id="{{item.id}}">
+        <view class="message-avatar">
+          <view class="avatar-container">
+            <text class="avatar-icon" wx:if="{{item.type === 0}}">📢</text>
+            <text class="avatar-icon" wx:elif="{{item.type === 1}}">📦</text>
+            <text class="avatar-icon" wx:else>💬</text>
+          </view>
+          <view class="unread-badge" wx:if="item.unread"></view>
+        </view>
+        
+        <view class="message-content">
+          <view class="message-header">
+            <text class="message-title">{{item.title}}</text>
+            <text class="message-time">{{item.time}}</text>
+          </view>
+          <text class="message-body">{{item.body}}</text>
+          <view class="message-footer" wx:if="{{item.type === 1 && item.orderStatus}}">
+            <text class="order-status-tag" wx:class="order-status-{{item.orderStatus}}">
+              {{item.orderStatus === 0 ? '待接单' : 
+                 item.orderStatus === 1 ? '已接单' : 
+                 item.orderStatus === 2 ? '已取货' : 
+                 item.orderStatus === 3 ? '已取消' : 
+                 item.orderStatus === 4 ? '已完成' : ''}}
+            </text>
+            <text class="chat-tag" bindtap="navigateToChat" data-sender-id="{{item.senderId}}" data-sender-name="{{item.sender}}">点击聊天</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view wx:if="{{messageList.length === 0}}" class="empty-state">
+      <text class="empty-icon" wx:if="{{activeTab === 0}}">📢</text>
+      <text class="empty-icon" wx:elif="{{activeTab === 1}}">📦</text>
+      <text class="empty-icon" wx:else>💬</text>
+      <text class="empty-text">
+        {{activeTab === 0 ? '暂无系统通知' : 
+           activeTab === 1 ? '暂无订单消息' : '暂无聊天消息'}}
+      </text>
+      <text class="empty-subtext">
+        {{activeTab === 0 ? '系统通知将会显示在这里' : 
+           activeTab === 1 ? '订单状态变更会通知您' : '聊天消息将会显示在这里'}}
+      </text>
+    </view>
+  </view>
+</scroll-view>

@@ -1,0 +1,169 @@
+.container {
+  padding: 20rpx;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.admin-header {
+  margin-bottom: 30rpx;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+
+.admin-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.admin-body {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.admin-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.search-bar {
+  display: flex;
+  margin-bottom: 20rpx;
+  gap: 10rpx;
+}
+
+.search-input {
+  flex: 1;
+  height: 60rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 30rpx;
+  padding: 0 20rpx;
+  font-size: 24rpx;
+  background-color: #f9f9f9;
+}
+
+.reset-btn {
+  width: 120rpx;
+  height: 60rpx;
+  font-size: 24rpx;
+  line-height: 60rpx;
+  padding: 0;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 30rpx;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.user-item {
+  padding: 20rpx;
+  border: 1rpx solid #e5e5e5;
+  border-radius: 10rpx;
+  background-color: #fafafa;
+}
+
+.user-info {
+  margin-bottom: 15rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 10rpx;
+}
+
+.user-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.user-name {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.user-phone {
+  font-size: 20rpx;
+  color: #666;
+}
+
+.user-password {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.user-role {
+  font-size: 20rpx;
+  color: #007aff;
+  display: inline-block;
+  margin-right: 20rpx;
+}
+
+.user-status {
+  font-size: 20rpx;
+  color: #4cd964;
+  display: inline-block;
+}
+
+.user-actions {
+  display: flex;
+  gap: 10rpx;
+}
+
+.action-btn {
+  flex: 1;
+  font-size: 20rpx;
+  padding: 10rpx;
+  border-radius: 5rpx;
+}
+
+.action-btn:nth-child(1) {
+  background-color: #007aff;
+  color: #fff;
+}
+
+.action-btn:nth-child(2) {
+  background-color: #ff9500;
+  color: #fff;
+}
+
+.action-btn:nth-child(3) {
+  background-color: #ff3b30;
+  color: #fff;
+}
+
+.action-btn[disabled] {
+  background-color: #ccc;
+  color: #999;
+}
+
+.user-actions {
+  display: flex;
+  gap: 10rpx;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  flex: 1;
+  min-width: 120rpx;
+  font-size: 20rpx;
+  padding: 10rpx;
+  border-radius: 5rpx;
+}

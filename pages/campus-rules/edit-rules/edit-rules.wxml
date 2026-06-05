@@ -1,0 +1,35 @@
+<!-- edit-rules.wxml -->
+<view class="container">
+  <!-- 规则编辑区域 -->
+  <view class="edit-section">
+    <view class="edit-header">
+      <text class="edit-title">编辑校园互助规则</text>
+      <button class="add-rule-btn" bindtap="addRuleItem">+ 添加规则</button>
+    </view>
+    
+    <view class="edit-body">
+      <view wx:for="{{ruleItems}}" wx:key="index" class="rule-item">
+        <view class="rule-header">
+          <text class="rule-index">规则 {{index + 1}}</text>
+          <button class="delete-rule-btn" bindtap="deleteRuleItem" data-index="{{index}}">- 删除</button>
+        </view>
+        <textarea 
+          class="rule-textarea" 
+          value="{{item}}" 
+          bindinput="handleRuleItemChange" 
+          data-index="{{index}}" 
+          placeholder="请输入规则内容" 
+          placeholder-class="textarea-placeholder"
+        ></textarea>
+      </view>
+      <view wx:if="{{ruleItems.length === 0}}" class="empty-rules">
+        <text class="empty-text">暂无规则，点击上方按钮添加规则</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 保存按钮 -->
+  <view class="action-section">
+    <button class="save-btn" bindtap="saveRules">保存规则</button>
+  </view>
+</view>

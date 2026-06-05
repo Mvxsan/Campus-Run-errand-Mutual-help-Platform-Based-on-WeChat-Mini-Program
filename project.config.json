@@ -1,0 +1,90 @@
+{
+  "compileType": "miniprogram",
+  "libVersion": "trial",
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "backend/"
+      },
+      {
+        "type": "folder",
+        "value": "db/"
+      },
+      {
+        "type": "folder",
+        "value": "typings/"
+      },
+      {
+        "type": "folder",
+        "value": ".vscode/"
+      },
+      {
+        "type": "folder",
+        "value": ".idea/"
+      },
+      {
+        "type": "folder",
+        "value": "follows/"
+      },
+      {
+        "type": "folder",
+        "value": "user-profile/"
+      },
+      {
+        "type": "file",
+        "value": "*.sql"
+      },
+      {
+        "type": "file",
+        "value": "*.md"
+      },
+      {
+        "type": "file",
+        "value": "*.log"
+      },
+      {
+        "type": "file",
+        "value": "test_login_role.js"
+      },
+      {
+        "type": "file",
+        "value": "jsconfig.json"
+      }
+    ],
+    "include": []
+  },
+  "setting": {
+    "coverView": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "enhance": false,
+    "showShadowRootInWxmlPanel": true,
+    "packNpmRelationList": [],
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false
+  },
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "auto",
+    "tabSize": 2
+  },
+  "appid": "wx241a53c6dbeacff7",
+  "simulatorPluginLibVersion": {}
+}

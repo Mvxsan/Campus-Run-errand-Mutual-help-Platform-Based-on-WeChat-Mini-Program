@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/order/order",
+    "pages/message/message",
+    "pages/message-detail/message-detail",
+    "pages/mine/mine",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/publish/publish",
+    "pages/admin/admin",
+    "pages/task-detail/task-detail",
+    "pages/edit-profile/edit-profile",
+    "pages/campus-rules/campus-rules",
+    "pages/campus-rules/edit-rules/edit-rules",
+    "pages/user-info/user-info",
+    "pages/chat/chat",
+    "pages/withdrawal/withdrawal",
+    "pages/review/review",
+    "pages/ranking/ranking",
+    "pages/follows/follows",
+    "pages/account-security/account-security",
+    "pages/my-evaluations/my-evaluations",
+    "pages/my-likes/my-likes",
+    "pages/income-detail/income-detail"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "校园跑腿",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#333",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

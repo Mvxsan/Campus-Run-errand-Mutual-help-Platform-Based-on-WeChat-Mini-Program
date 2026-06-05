@@ -1,0 +1,73 @@
+<view class="container" bindrefresherpulling="onPullDownRefresh" bindrefresherrefresh="onPullDownRefresh" refresher-enabled="true" refresher-background="#f5f5f5" refresher-triggered="{{refresherTriggered}}">
+  <!-- 下拉刷新提示 -->
+  <view wx:if="{{refresherTriggered}}" class="refresher-tip">正在刷新...</view>
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="back-btn" bindtap="navigateBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">排行榜</text>
+    <view class="header-right"></view>
+  </view>
+  
+  <!-- 排行榜标签 -->
+  <view class="ranking-tabs">
+    <view 
+      class="tab-item {{activeTab === 0 ? 'active' : ''}}" 
+      bindtap="switchRankingTab" 
+      data-index="0"
+    >
+      <text class="tab-text">任务完成榜</text>
+    </view>
+    <view 
+      class="tab-item {{activeTab === 1 ? 'active' : ''}}" 
+      bindtap="switchRankingTab" 
+      data-index="1"
+    >
+      <text class="tab-text">获赞榜</text>
+    </view>
+  </view>
+  
+  <!-- 排行榜内容 -->
+  <view class="ranking-content">
+    <!-- 任务完成榜 -->
+    <view wx:if="{{activeTab === 0}}" class="ranking-list">
+      <block wx:for="{{taskCompletionRanking}}" wx:key="index">
+        <view class="ranking-item">
+          <view class="rank-number {{index < 3 ? 'top' : ''}}">{{index + 1}}</view>
+          <view class="user-info" bindtap="navigateToUserInfo" data-userid="{{item.id}}" data-nickname="{{item.nickname}}">
+            <image class="user-avatar" src="{{item.avatar && item.avatar.startsWith('/api') ? 'http://localhost:8881' + item.avatar : (item.avatar && item.avatar.startsWith('/') ? 'http://localhost:8881/api' + item.avatar : (item.avatar || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'))}}" mode="aspectFill"></image>
+            <text class="user-name">{{item.nickname}}</text>
+          </view>
+          <view class="ranking-value">
+            <text class="value-number">{{item.taskCount}}</text>
+            <text class="value-label">单</text>
+          </view>
+        </view>
+      </block>
+      <view wx:if="{{taskCompletionRanking.length === 0}}" class="empty-state">
+        <text class="empty-text">暂无数据</text>
+      </view>
+    </view>
+    
+    <!-- 获赞榜 -->
+    <view wx:else class="ranking-list">
+      <block wx:for="{{likesRanking}}" wx:key="index">
+        <view class="ranking-item">
+          <view class="rank-number {{index < 3 ? 'top' : ''}}">{{index + 1}}</view>
+          <view class="user-info" bindtap="navigateToUserInfo" data-userid="{{item.id}}" data-nickname="{{item.nickname}}">
+            <image class="user-avatar" src="{{item.avatar && item.avatar.startsWith('/api') ? 'http://localhost:8881' + item.avatar : (item.avatar && item.avatar.startsWith('/') ? 'http://localhost:8881/api' + item.avatar : (item.avatar || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'))}}" mode="aspectFill"></image>
+            <text class="user-name">{{item.nickname}}</text>
+          </view>
+          <view class="ranking-value">
+            <text class="value-number">{{item.likesCount}}</text>
+            <text class="value-label">赞</text>
+          </view>
+        </view>
+      </block>
+      <view wx:if="{{likesRanking.length === 0}}" class="empty-state">
+        <text class="empty-text">暂无数据</text>
+      </view>
+    </view>
+  </view>
+</view>

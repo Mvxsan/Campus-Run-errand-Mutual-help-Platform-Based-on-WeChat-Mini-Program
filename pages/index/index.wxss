@@ -1,0 +1,638 @@
+/**index.wxss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.container {
+  padding: 20rpx;
+}
+
+/* 搜索栏 */
+.search-bar {
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 12rpx 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.search-icon {
+  font-size: 24rpx;
+  color: #999999;
+  margin-right: 10rpx;
+}
+
+.search-input input {
+  flex: 1;
+  font-size: 24rpx;
+  color: #333333;
+  padding: 0;
+}
+
+.search-placeholder {
+  color: #999999;
+}
+
+/* 任务类型标签 */
+.task-type-tags {
+  display: flex;
+  gap: 15rpx;
+  margin-bottom: 20rpx;
+  flex-wrap: wrap;
+}
+
+.task-type-tag {
+  padding: 10rpx 28rpx;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+  color: #666666;
+  background-color: #ffffff;
+  border: 2rpx solid #e6e6e6;
+  transition: all 0.3s ease;
+}
+
+.task-type-tag.active {
+  background-color: #1890ff;
+  color: #ffffff;
+  border-color: #1890ff;
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.3);
+}
+
+.task-type-tag:active {
+  transform: scale(0.96);
+}
+
+/* 分类标签 */
+.category-tabs {
+  margin-bottom: 20rpx;
+}
+
+.category-scroll {
+  white-space: nowrap;
+  padding-bottom: 10rpx;
+}
+
+.category-tab {
+  display: inline-block;
+  padding: 10rpx 24rpx;
+  margin-right: 15rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  color: #666666;
+  background-color: #ffffff;
+  border: 1rpx solid #e6e6e6;
+  transition: all 0.3s ease;
+}
+
+.category-tab.active {
+  background-color: #1890ff;
+  color: #ffffff;
+  border-color: #1890ff;
+  box-shadow: 0 2rpx 8rpx rgba(24, 144, 255, 0.3);
+}
+
+.category-tab:hover {
+  transform: translateY(-2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 发布任务按钮 */
+.publish-btn-container {
+  margin-bottom: 30rpx;
+}
+
+.publish-btn {
+  width: 100%;
+  height: 80rpx;
+  background-color: #1890ff;
+  color: #ffffff;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.publish-btn::after {
+  border-radius: 40rpx;
+}
+
+.publish-btn:hover {
+  background-color: #40a9ff;
+  transform: translateY(-2rpx);
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.3);
+}
+
+/* 排行榜区域 */
+.ranking-section {
+  margin-bottom: 30rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.ranking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.ranking-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.ranking-more {
+  font-size: 22rpx;
+  color: #1890ff;
+}
+
+.ranking-tabs {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.ranking-tab {
+  flex: 1;
+  text-align: center;
+  padding: 12rpx 0;
+  position: relative;
+}
+
+.ranking-tab.active {
+  color: #1890ff;
+}
+
+.ranking-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 60%;
+  height: 2rpx;
+  background-color: #1890ff;
+}
+
+.ranking-tab-text {
+  font-size: 24rpx;
+}
+
+.ranking-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.ranking-item:last-child {
+  border-bottom: none;
+}
+
+.ranking-number {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #666;
+  margin-right: 16rpx;
+}
+
+.ranking-number.top {
+  background-color: #ffd700;
+  color: white;
+}
+
+.ranking-number.top:nth-child(2) {
+  background-color: #c0c0c0;
+}
+
+.ranking-number.top:nth-child(3) {
+  background-color: #cd7f32;
+}
+
+.ranking-user {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.ranking-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+
+.ranking-nickname {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.ranking-value {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #ff4d4f;
+}
+
+.ranking-empty {
+  padding: 48rpx 0;
+  text-align: center;
+  color: #999;
+  font-size: 24rpx;
+}
+
+/* 任务列表 */
+.task-list {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.list-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.list-count {
+  font-size: 20rpx;
+  color: #999999;
+}
+
+/* 任务项 */
+.task-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.task-item {
+  padding: 24rpx;
+  border: 1rpx solid #f0f0f0;
+  border-radius: 16rpx;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.task-item:hover {
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  transform: translateY(-4rpx);
+  border-color: #e6f7ff;
+}
+
+/* 任务头部 */
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.task-title-container {
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.task-title {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.task-reward {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.task-status {
+  padding: 6rpx 16rpx;
+  border-radius: 16rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+}
+
+.task-status-pending {
+  background-color: #fff7e6;
+  color: #fa8c16;
+  border: 1rpx solid #ffd591;
+}
+
+.task-status-accepted {
+  background-color: #f6ffed;
+  color: #52c41a;
+  border: 1rpx solid #b7eb8f;
+}
+
+/* 任务信息 */
+.task-info {
+  margin-bottom: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+  font-size: 22rpx;
+  color: #666666;
+}
+
+.info-label {
+  color: #999999;
+  margin-right: 10rpx;
+  min-width: 80rpx;
+}
+
+.info-value {
+  color: #333333;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 任务底部 */
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15rpx;
+  border-top: 1rpx dashed #f0f0f0;
+}
+
+.publisher-info {
+  display: flex;
+  align-items: center;
+}
+
+.publisher-avatar {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.publisher-avatar-img {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+  object-fit: cover;
+}
+
+.task-publisher {
+  font-size: 20rpx;
+  color: #666666;
+}
+
+.task-meta {
+  font-size: 18rpx;
+  color: #999999;
+}
+
+/* 任务操作区域 */
+.task-action {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 接单按钮 */
+.accept-btn {
+  padding: 12rpx 32rpx;
+  background-color: #1890ff;
+  color: #ffffff;
+  font-size: 22rpx;
+  border-radius: 24rpx;
+  transition: all 0.3s ease;
+}
+
+.accept-btn::after {
+  border-radius: 24rpx;
+}
+
+.accept-btn:hover {
+  background-color: #40a9ff;
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.accept-btn:active {
+  transform: scale(0.95);
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 0;
+  color: #999999;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 26rpx;
+  text-align: center;
+  margin-bottom: 10rpx;
+  color: #666666;
+}
+
+.empty-subtext {
+  font-size: 22rpx;
+  text-align: center;
+  color: #999999;
+}
+
+/* 加载状态 */
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+  color: #999999;
+}
+
+.loading-spinner {
+  width: 36rpx;
+  height: 36rpx;
+  border: 4rpx solid #f0f0f0;
+  border-top: 4rpx solid #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 22rpx;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+  .task-title {
+    font-size: 24rpx;
+  }
+  
+  .task-reward {
+    font-size: 26rpx;
+  }
+  
+  .info-item {
+    font-size: 20rpx;
+  }
+  
+  .task-footer {
+    font-size: 18rpx;
+  }
+  
+  .accept-btn {
+    padding: 10rpx 28rpx;
+    font-size: 20rpx;
+  }
+}
+
+/* 未登录提示样式 */
+.login-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin: 20rpx 0;
+  padding: 60rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+}
+
+.prompt-icon {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 40rpx;
+}
+
+.prompt-icon image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.prompt-text {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 50rpx;
+  text-align: center;
+}
+
+.login-btn {
+  width: 240rpx;
+  height: 88rpx;
+  background-color: #1890ff;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.login-btn::after {
+  border-radius: 44rpx;
+}
+
+.login-btn:hover {
+  background-color: #40a9ff;
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.3);
+}
+
+/* 任务内容区域 */
+.task-content {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.task-content:hover {
+  opacity: 0.95;
+}
+
+/* 任务时间 */
+.task-time-created {
+  font-size: 18rpx;
+  color: #999999;
+}

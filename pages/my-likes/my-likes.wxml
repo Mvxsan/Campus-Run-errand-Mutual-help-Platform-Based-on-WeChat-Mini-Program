@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="header">
+    <view class="back-btn" bindtap="navigateBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">我的点赞</text>
+    <view class="header-right"></view>
+  </view>
+
+  <scroll-view class="like-list" scroll-y="true">
+    <view wx:if="{{likedUsers.length === 0}}" class="empty-container">
+      <text class="empty-text">暂未点赞任何人</text>
+    </view>
+
+    <view wx:for="{{likedUsers}}" wx:key="id" class="user-item" bindtap="viewUser" data-userid="{{item.id}}" data-nickname="{{item.nickname}}">
+      <image class="user-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+      <view class="user-info">
+        <text class="user-name">{{item.nickname}}</text>
+        <text class="user-phone">{{item.phone}}</text>
+      </view>
+      <view class="like-icon active">
+        <text class="icon-text">❤</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

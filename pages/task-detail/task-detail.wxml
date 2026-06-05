@@ -1,0 +1,266 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="back-btn" bindtap="navigateBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">任务详情</text>
+    <view class="header-right"></view>
+  </view>
+  
+  <!-- 任务状态 -->
+  <view class="status-section">
+    <view class="status-badge" style="background-color: {{statusColor}}">
+      <text class="status-text">{{taskStatus}}</text>
+    </view>
+    <text class="status-desc">{{actionText}}</text>
+  </view>
+  
+  <!-- 任务信息卡片 -->
+  <view class="task-card">
+    <view class="card-header">
+      <text class="task-title">{{task.title}}</text>
+      <text class="task-reward">¥{{task.reward}}</text>
+    </view>
+    
+    <view class="card-content">
+      <!-- 任务描述 -->
+      <view class="info-item description-item" wx:if="{{task.description}}">
+        <text class="info-label">任务描述：</text>
+        <text class="info-value description">{{task.description}}</text>
+      </view>
+      
+      <!-- 任务类型 -->
+      <view class="info-item">
+        <text class="info-icon">📋</text>
+        <text class="info-label">任务类型：</text>
+        <text class="info-value">{{task.type}}</text>
+      </view>
+      
+      <!-- 任务地点 -->
+      <view class="info-item">
+        <text class="info-icon">📍</text>
+        <text class="info-label">任务地点：</text>
+        <text class="info-value">{{task.location}}</text>
+      </view>
+      
+      <!-- 任务时间 -->
+      <view class="info-item">
+        <text class="info-icon">⏰</text>
+        <text class="info-label">任务时间：</text>
+        <text class="info-value">{{startTime}} - {{endTime}}</text>
+      </view>
+      
+      <!-- 发布者信息 -->
+      <view class="info-item">
+        <text class="info-icon">👤</text>
+        <text class="info-label">发布者：</text>
+        <view class="publisher-info" bindtap="navigateToUserProfile" data-user-id="{{task.publisher ? task.publisher.id : ''}}" data-user-name="{{task.publisher ? task.publisher.nickname || '未知用户' : '未知用户'}}">
+          <image class="publisher-avatar" src="{{task.publisher ? (task.publisher.avatar && (task.publisher.avatar.indexOf('http://tmp/') === 0 || task.publisher.avatar.indexOf('_tmp_') > 0) ? 'https://img.icons8.com/color/48/000000/user.png' : task.publisher.avatar) : 'https://img.icons8.com/color/48/000000/user.png'}}" mode="aspectFill"></image>
+          <text class="info-value">{{task.publisher ? task.publisher.nickname || '未知用户' : '未知用户'}}</text>
+        </view>
+      </view>
+      
+      <!-- 接单人信息 -->
+      <view class="info-item" wx:if="{{task.acceptor}}">
+        <text class="info-icon">✅</text>
+        <text class="info-label">接单人：</text>
+        <view class="publisher-info" bindtap="navigateToUserProfile" data-user-id="{{task.acceptor ? task.acceptor.id : ''}}" data-user-name="{{task.acceptor ? task.acceptor.nickname || '未知用户' : '未知用户'}}">
+          <image class="publisher-avatar" src="{{task.acceptor.avatar && (task.acceptor.avatar.indexOf('http://tmp/') === 0 || task.acceptor.avatar.indexOf('_tmp_') > 0) ? 'https://img.icons8.com/color/48/000000/user.png' : task.acceptor.avatar || 'https://img.icons8.com/color/48/000000/user.png'}}" mode="aspectFill"></image>
+          <text class="info-value">{{task.acceptor.nickname || '未知用户'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 操作按钮区域 -->
+  <view class="action-section">
+    <!-- 接单按钮 -->
+    <button 
+      wx:if="{{canAccept}}" 
+      class="action-btn primary" 
+      bindtap="handleAcceptTask"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      接单
+    </button>
+    
+    <!-- 取消接单按钮 -->
+    <button 
+      wx:if="{{canCancelAccept}}" 
+      class="action-btn danger" 
+      bindtap="handleCancelAccept"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      取消接单
+    </button>
+    
+    <!-- 已取货按钮 -->
+    <button 
+      wx:if="{{canPickup}}" 
+      class="action-btn primary" 
+      bindtap="handlePickupTask"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      已取货
+    </button>
+    
+    <!-- 已送达按钮 -->
+    <button 
+      wx:if="{{canDeliver}}" 
+      class="action-btn primary" 
+      bindtap="handleDeliverTask"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      已送达
+    </button>
+    
+    <!-- 完成任务按钮 -->
+    <button 
+      wx:if="{{canComplete}}" 
+      class="action-btn primary" 
+      bindtap="handleCompleteTask"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      确认完成
+    </button>
+    
+    <!-- 确认收货按钮 -->
+    <button 
+      wx:if="{{canConfirm}}" 
+      class="action-btn primary" 
+      bindtap="handleConfirmTask"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      确认收货
+    </button>
+    
+    <!-- 评价按钮 -->
+    <button 
+      wx:if="{{canReview}}" 
+      class="action-btn primary" 
+      bindtap="handleReviewTask"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      评价
+    </button>
+    
+    <!-- 管理员禁止任务按钮 -->
+    <button 
+      wx:if="{{isAdmin && task.status !== 5 && task.status !== 6}}" 
+      class="action-btn danger" 
+      bindtap="handleDisableTask"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      禁止任务
+    </button>
+    
+    <!-- 管理员恢复任务按钮 -->
+    <button 
+      wx:if="{{isAdmin && task.status === 5 && task.cancelType === 2}}" 
+      class="action-btn primary" 
+      bindtap="handleRestoreTask"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      恢复订单
+    </button>
+    
+    <!-- 不可接单提示 -->
+    <view wx:if="{{!canAccept && !canCancelAccept && !canComplete && !canConfirm && !canReview && !isAdmin}}" class="no-action">
+      <text class="no-action-text">{{actionText}}</text>
+    </view>
+  </view>
+  
+  <!-- 任务流程进度 -->
+  <view class="process-section" wx:if="{{task.status > 0}}">
+    <text class="process-title">任务进度</text>
+    <view class="process-steps">
+      <view class="process-step {{task.status >= 1 ? 'active' : ''}}">
+        <view class="step-dot"></view>
+        <text class="step-text">已接单</text>
+      </view>
+      <view class="process-line {{task.status >= 2 ? 'active' : ''}}"></view>
+      <view class="process-step {{task.status >= 2 ? 'active' : ''}}">
+        <view class="step-dot"></view>
+        <text class="step-text">已取货</text>
+      </view>
+      <view class="process-line {{task.status >= 3 ? 'active' : ''}}"></view>
+      <view class="process-step {{task.status >= 3 ? 'active' : ''}}">
+        <view class="step-dot"></view>
+        <text class="step-text">已送达</text>
+      </view>
+      <view class="process-line {{task.status >= 4 ? 'active' : ''}}"></view>
+      <view class="process-step {{task.status >= 4 ? 'active' : ''}}">
+        <view class="step-dot"></view>
+        <text class="step-text">已完成</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 评价部分 -->
+  <view class="reviews-section" wx:if="{{task.status >= 4 && reviews.length > 0}}">
+    <text class="reviews-title">任务评价</text>
+    <view class="reviews-list">
+      <block wx:for="{{reviews}}" wx:key="id">
+        <view class="review-item">
+          <view class="review-header">
+            <view class="reviewer-info">
+              <image class="reviewer-avatar" src="{{item.reviewer.avatar && (item.reviewer.avatar.indexOf('http://tmp/') === 0 || item.reviewer.avatar.indexOf('_tmp_') > 0) ? 'https://img.icons8.com/color/48/000000/user.png' : item.reviewer.avatar || 'https://img.icons8.com/color/48/000000/user.png'}}" mode="aspectFill"></image>
+              <view class="reviewer-details">
+                <text class="reviewer-name">{{item.reviewer.nickname || '未知用户'}}</text>
+                <text class="reviewer-role">{{task.publisher && task.publisher.id === item.reviewer.id ? '发布者' : (task.acceptor && task.acceptor.id === item.reviewer.id ? '接单员' : '未知')}}</text>
+              </view>
+            </view>
+            <view class="review-rating">
+              <text class="rating-stars">★★★★★</text>
+              <text class="rating-value">{{item.rating}}</text>
+            </view>
+          </view>
+          <view class="review-tags" wx:if="{{item.tags}}">
+            <block wx:for="{{item.tags.split(',')}}" wx:key="*this">
+              <text class="tag">{{item}}</text>
+            </block>
+          </view>
+          <view class="review-content" wx:if="{{item.content}}">
+            <text class="content-text">{{item.content}}</text>
+          </view>
+          <view class="review-images" wx:if="{{item.imagesArray && item.imagesArray.length > 0}}">
+            <block wx:for="{{item.imagesArray}}" wx:key="*this" wx:for-item="image">
+              <image class="review-image" src="{{image}}" mode="aspectFill"></image>
+            </block>
+          </view>
+          <text class="review-time">{{item.createdAt}}</text>
+          
+          <!-- 追加评价 -->
+          <block wx:for="{{item.additionalReviews}}" wx:key="id" wx:for-item="review">
+            <view class="additional-review">
+              <view class="review-tags" wx:if="{{review.tags}}">
+                <block wx:for="{{review.tags.split(',')}}" wx:key="*this" wx:for-item="tag">
+                  <text class="tag">{{tag}}</text>
+                </block>
+              </view>
+              <view class="additional-content" wx:if="{{review.content}}">
+                <text class="content-text">{{review.content}}</text>
+              </view>
+              <view class="review-images" wx:if="{{review.imagesArray && review.imagesArray.length > 0}}">
+                <block wx:for="{{review.imagesArray}}" wx:key="*this" wx:for-item="image">
+                  <image class="review-image" src="{{image}}" mode="aspectFill"></image>
+                </block>
+              </view>
+              <text class="additional-time">{{review.createdAt}}</text>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,76 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="back-btn" bindtap="navigateBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">收入明细</text>
+    <view class="header-right"></view>
+  </view>
+
+  <!-- 统计信息 -->
+  <view class="stats-section">
+    <view class="stat-item">
+      <text class="stat-value">¥{{totalIncome || 0.00}}</text>
+      <text class="stat-label">总收入</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-value">¥{{totalWithdrawal || 0.00}}</text>
+      <text class="stat-label">总提现</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-value">¥{{balance || 0.00}}</text>
+      <text class="stat-label">可用余额</text>
+    </view>
+  </view>
+
+  <!-- 收入列表 -->
+  <view class="income-list">
+    <view class="list-header">
+      <text class="list-title">收入记录</text>
+    </view>
+    
+    <view wx:if="{{incomeRecords.length === 0}}" class="empty-container">
+      <text class="empty-text">暂无收入记录</text>
+    </view>
+
+    <view wx:for="{{incomeRecords}}" wx:key="id" class="income-item">
+      <view class="income-icon">
+        <text class="icon-text">💰</text>
+      </view>
+      <view class="income-info">
+        <text class="income-task">{{item.taskTitle || '任务收入'}}</text>
+        <text class="income-time">{{item.time}}</text>
+      </view>
+      <view class="income-amount">
+        <text class="amount-value">+¥{{item.amount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提现记录 -->
+  <view class="withdrawal-list">
+    <view class="list-header">
+      <text class="list-title">提现记录</text>
+    </view>
+    
+    <view wx:if="{{withdrawalRecords.length === 0}}" class="empty-container">
+      <text class="empty-text">暂无提现记录</text>
+    </view>
+
+    <view wx:for="{{withdrawalRecords}}" wx:key="id" class="withdrawal-item">
+      <view class="withdrawal-icon">
+        <text class="icon-text">💳</text>
+      </view>
+      <view class="withdrawal-info">
+        <text class="withdrawal-title">提现</text>
+        <text class="withdrawal-time">{{item.time}}</text>
+      </view>
+      <view class="withdrawal-amount">
+        <text class="amount-value">-¥{{item.amount}}</text>
+      </view>
+    </view>
+  </view>
+</view>
